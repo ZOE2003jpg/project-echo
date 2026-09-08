@@ -210,7 +210,7 @@ function ApplicationsPage() {
   if (loading) return <ListPageSkeleton rows={8} />;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       <PageHeader
         title="Applications"
         description="Active, in-progress applications. Approved, rejected and completed applications move to Position Management."
@@ -228,10 +228,10 @@ function ApplicationsPage() {
       />
 
       {/* Search first — it always spans every record and every date. */}
-      <div className="panel space-y-4 p-4 sm:p-5">
+      <div className="workbench-enter panel space-y-5 p-4 sm:p-6">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div className="space-y-1.5">
-            <Label htmlFor="applicant-search" className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <Label htmlFor="applicant-search" className="text-[10px] font-extrabold uppercase text-muted-foreground">
               Find an applicant
             </Label>
             <SearchInput
@@ -241,7 +241,7 @@ function ApplicationsPage() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Status</Label>
+            <Label className="text-[10px] font-extrabold uppercase text-muted-foreground">Status</Label>
             <Select value={activeStatus} onValueChange={(v) => setSearchParam({ status: v })}>
               <SelectTrigger className="h-10 lg:w-60">
                 <SelectValue />
@@ -301,12 +301,12 @@ function ApplicationsPage() {
       </div>
 
       {/* Product / Paypoint filter */}
-      <div className="overflow-x-auto pb-1">
+      <div className="workbench-enter overflow-x-auto border-b border-border pb-4">
         <Tabs value={activeProduct} onValueChange={(v) => setSearchParam({ product: v })}>
           <TabsList className="h-auto flex-wrap justify-start gap-1.5 bg-transparent p-0">
             <TabsTrigger
               value="All"
-              className="rounded-full border border-border px-3 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+               className="rounded-md border border-border px-3 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
               All <Badge variant="secondary" className="ml-1.5 tabular-nums">{activeOnly.length}</Badge>
             </TabsTrigger>
@@ -314,7 +314,7 @@ function ApplicationsPage() {
               <TabsTrigger
                 key={name}
                 value={name}
-                className="rounded-full border border-border px-3 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                 className="rounded-md border border-border px-3 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 {name} <Badge variant="secondary" className="ml-1.5 tabular-nums">{count}</Badge>
               </TabsTrigger>
@@ -323,7 +323,7 @@ function ApplicationsPage() {
         </Tabs>
       </div>
 
-      <Card>
+      <Card className="table-shell-enter overflow-hidden">
         <CardHeader className="border-b border-border/60">
           <CardTitle className="section-title text-base">
             {isSearching
