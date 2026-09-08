@@ -4,20 +4,16 @@ import { format } from "date-fns";
 import { FileText, Clock, CheckCircle2, XCircle, TrendingUp, Users, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StatCard } from "@/components/admin/StatCard";
 import { StatusBadge } from "@/components/admin/StatusBadge";
+import { PageHeader } from "@/components/admin/PageHeader";
+import { DataTable, type Column } from "@/components/admin/DataTable";
+import { ApplicantCell } from "@/components/admin/ApplicantCell";
+import { EmptyState } from "@/components/admin/StateBlocks";
 import { getAllApplications, formatNaira, type Application } from "@/lib/applications";
 
-const ASSET_BASE = "https://pitchcapital.ng/api/";
-function resolveAssetUrl(path?: string | null): string {
-  if (!path) return "";
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return ASSET_BASE + path.replace(/^\/+/, "");
-}
 
 export const Route = createFileRoute("/admin/")({
   head: () => ({ meta: [{ title: "Dashboard — Admin" }] }),
@@ -78,12 +74,34 @@ function DashboardPage() {
     );
   }
 
+  const recentColumns: Column<Application>[] = [
+    { key: "applicant", header: "Applicant", primary: true, cell: (a) => <ApplicantCell application={a} /> },
+    {
+      key: "amount",
+      header: "Amount",
+      align: "right",
+      numeric: true,
+      cell: (a) => (
+        <span className="whitespace-nowrap text-sm font-semibold">
+          {formatNaira(a.amountRequested || a.amount_requested)}
+        </span>
+      ),
+    },
+    {
+      key: "date",
+      header: "Date",
+      cell: (a) => (
+        <span className="whitespace-nowrap text-sm text-muted-foreground">
+          {format(new Date(a.submittedAt || a.submitted_at || 0), "MMM d, yyyy")}
+        </span>
+      ),
+    },
+    { key: "status", header: "Status", cell: (a) => <StatusBadge status={a.status} /> },
+  ];
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">Overview of loan applications and activity.</p>
-      </div>
+      <PageHeader title="Dashboard" description="Overview of loan applications and activity." />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total Applications" value={total} icon={FileText} tone="primary" hint="All time" />
@@ -94,9 +112,9 @@ function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
-          <CardHeader className="flex flex-row items-center justify-between gap-2 space-y-0">
+          <CardHeader className="flex flex-row items-center justify-between gap-2 space-y-0 border-b border-border/60">
             <div>
-              <CardTitle>Recent Applications</CardTitle>
+              <CardTitle className="section-title text-base">Recent applications</CardTitle>
               <CardDescription>Latest 6 applications submitted</CardDescription>
             </div>
             <Button asChild variant="outline" size="sm">
@@ -106,43 +124,22 @@ function DashboardPage() {
             </Button>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Applicant</TableHead>
-                    <TableHead>Amount</TableHead>
-                    <TableHead className="hidden md:table-cell">Date</TableHead>
-                    <TableHead>Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {recent.map((a) => (
-                    <TableRow key={a.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-3">
-                          <Avatar className="h-9 w-9">
-                            <AvatarImage src={resolveAssetUrl(a.passport)} alt={a.firstName || a.first_name || ""} />
-                            <AvatarFallback>{(a.firstName || a.first_name || "")[0]}{a.surname[0]}</AvatarFallback>
-                          </Avatar>
-                          <div className="min-w-0">
-                            <div className="truncate text-sm font-medium">{a.firstName || a.first_name} {a.surname}</div>
-                            <div className="truncate text-xs text-muted-foreground">{a.id}</div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="font-medium">{formatNaira(a.amountRequested || a.amount_requested)}</TableCell>
-                      <TableCell className="hidden md:table-cell text-sm text-muted-foreground">
-                        {format(new Date(a.submittedAt || a.submitted_at || 0), "MMM d, yyyy")}
-                      </TableCell>
-                      <TableCell><StatusBadge status={a.status} /></TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+            {recent.length === 0 ? (
+              <EmptyState
+                title="No applications yet"
+                body="Submitted loan applications will appear here as soon as the first one arrives."
+              />
+            ) : (
+              <DataTable
+                columns={recentColumns}
+                rows={recent}
+                getRowKey={(a) => String(a.id)}
+                caption="Recent applications"
+              />
+            )}
           </CardContent>
         </Card>
+
 
         <div className="space-y-4">
           <Card>
