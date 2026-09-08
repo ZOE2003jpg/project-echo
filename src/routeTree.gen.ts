@@ -10,33 +10,228 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/_dashboard'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DashboardFrontdeskRouteImport } from './routes/_dashboard.frontdesk'
+import { Route as DashboardMarketerRouteImport } from './routes/_dashboard.marketer'
+import { Route as DashboardOperationsRouteImport } from './routes/_dashboard.operations'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminPositionManagementRouteImport } from './routes/admin.position-management'
+import { Route as AdminProfileRouteImport } from './routes/admin.profile'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as LoginFrontdeskRouteImport } from './routes/login.frontdesk'
+import { Route as LoginMarketerRouteImport } from './routes/login.marketer'
+import { Route as LoginOperationsRouteImport } from './routes/login.operations'
+import { Route as AdminApplicationIdRouteImport } from './routes/admin.application.$id'
+import { Route as ApiPublicPcSplatRouteImport } from './routes/api/public/pc.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardFrontdeskRoute = DashboardFrontdeskRouteImport.update({
+  id: '/frontdesk',
+  path: '/frontdesk',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMarketerRoute = DashboardMarketerRouteImport.update({
+  id: '/marketer',
+  path: '/marketer',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOperationsRoute = DashboardOperationsRouteImport.update({
+  id: '/operations',
+  path: '/operations',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPositionManagementRoute = AdminPositionManagementRouteImport.update({
+  id: '/position-management',
+  path: '/position-management',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const LoginFrontdeskRoute = LoginFrontdeskRouteImport.update({
+  id: '/login/frontdesk',
+  path: '/login/frontdesk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginMarketerRoute = LoginMarketerRouteImport.update({
+  id: '/login/marketer',
+  path: '/login/marketer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginOperationsRoute = LoginOperationsRouteImport.update({
+  id: '/login/operations',
+  path: '/login/operations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminApplicationIdRoute = AdminApplicationIdRouteImport.update({
+  id: '/application/$id',
+  path: '/application/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiPublicPcSplatRoute = ApiPublicPcSplatRouteImport.update({
+  id: '/api/public/pc/$',
+  path: '/api/public/pc/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/frontdesk': typeof DashboardFrontdeskRoute
+  '/marketer': typeof DashboardMarketerRoute
+  '/operations': typeof DashboardOperationsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/position-management': typeof AdminPositionManagementRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/login/frontdesk': typeof LoginFrontdeskRoute
+  '/login/marketer': typeof LoginMarketerRoute
+  '/login/operations': typeof LoginOperationsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/application/$id': typeof AdminApplicationIdRoute
+  '/api/public/pc/$': typeof ApiPublicPcSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/frontdesk': typeof DashboardFrontdeskRoute
+  '/marketer': typeof DashboardMarketerRoute
+  '/operations': typeof DashboardOperationsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/position-management': typeof AdminPositionManagementRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/login/frontdesk': typeof LoginFrontdeskRoute
+  '/login/marketer': typeof LoginMarketerRoute
+  '/login/operations': typeof LoginOperationsRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/application/$id': typeof AdminApplicationIdRoute
+  '/api/public/pc/$': typeof ApiPublicPcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_dashboard': typeof DashboardRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/_dashboard/frontdesk': typeof DashboardFrontdeskRoute
+  '/_dashboard/marketer': typeof DashboardMarketerRoute
+  '/_dashboard/operations': typeof DashboardOperationsRoute
+  '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/position-management': typeof AdminPositionManagementRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/login/frontdesk': typeof LoginFrontdeskRoute
+  '/login/marketer': typeof LoginMarketerRoute
+  '/login/operations': typeof LoginOperationsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/application/$id': typeof AdminApplicationIdRoute
+  '/api/public/pc/$': typeof ApiPublicPcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/frontdesk'
+    | '/marketer'
+    | '/operations'
+    | '/admin/applications'
+    | '/admin/login'
+    | '/admin/position-management'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/login/frontdesk'
+    | '/login/marketer'
+    | '/login/operations'
+    | '/admin/'
+    | '/admin/application/$id'
+    | '/api/public/pc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/frontdesk'
+    | '/marketer'
+    | '/operations'
+    | '/admin/applications'
+    | '/admin/login'
+    | '/admin/position-management'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/login/frontdesk'
+    | '/login/marketer'
+    | '/login/operations'
+    | '/admin'
+    | '/admin/application/$id'
+    | '/api/public/pc/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/_dashboard'
+    | '/admin'
+    | '/_dashboard/frontdesk'
+    | '/_dashboard/marketer'
+    | '/_dashboard/operations'
+    | '/admin/applications'
+    | '/admin/login'
+    | '/admin/position-management'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/login/frontdesk'
+    | '/login/marketer'
+    | '/login/operations'
+    | '/admin/'
+    | '/admin/application/$id'
+    | '/api/public/pc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  LoginFrontdeskRoute: typeof LoginFrontdeskRoute
+  LoginMarketerRoute: typeof LoginMarketerRoute
+  LoginOperationsRoute: typeof LoginOperationsRoute
+  ApiPublicPcSplatRoute: typeof ApiPublicPcSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +243,167 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_dashboard/frontdesk': {
+      id: '/_dashboard/frontdesk'
+      path: '/frontdesk'
+      fullPath: '/frontdesk'
+      preLoaderRoute: typeof DashboardFrontdeskRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/marketer': {
+      id: '/_dashboard/marketer'
+      path: '/marketer'
+      fullPath: '/marketer'
+      preLoaderRoute: typeof DashboardMarketerRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/operations': {
+      id: '/_dashboard/operations'
+      path: '/operations'
+      fullPath: '/operations'
+      preLoaderRoute: typeof DashboardOperationsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/applications': {
+      id: '/admin/applications'
+      path: '/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AdminApplicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/position-management': {
+      id: '/admin/position-management'
+      path: '/position-management'
+      fullPath: '/admin/position-management'
+      preLoaderRoute: typeof AdminPositionManagementRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/login/frontdesk': {
+      id: '/login/frontdesk'
+      path: '/login/frontdesk'
+      fullPath: '/login/frontdesk'
+      preLoaderRoute: typeof LoginFrontdeskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/marketer': {
+      id: '/login/marketer'
+      path: '/login/marketer'
+      fullPath: '/login/marketer'
+      preLoaderRoute: typeof LoginMarketerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/operations': {
+      id: '/login/operations'
+      path: '/login/operations'
+      fullPath: '/login/operations'
+      preLoaderRoute: typeof LoginOperationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/application/$id': {
+      id: '/admin/application/$id'
+      path: '/application/$id'
+      fullPath: '/admin/application/$id'
+      preLoaderRoute: typeof AdminApplicationIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/public/pc/$': {
+      id: '/api/public/pc/$'
+      path: '/api/public/pc/$'
+      fullPath: '/api/public/pc/$'
+      preLoaderRoute: typeof ApiPublicPcSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardFrontdeskRoute: typeof DashboardFrontdeskRoute
+  DashboardMarketerRoute: typeof DashboardMarketerRoute
+  DashboardOperationsRoute: typeof DashboardOperationsRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardFrontdeskRoute: DashboardFrontdeskRoute,
+  DashboardMarketerRoute: DashboardMarketerRoute,
+  DashboardOperationsRoute: DashboardOperationsRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminApplicationsRoute: typeof AdminApplicationsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminPositionManagementRoute: typeof AdminPositionManagementRoute
+  AdminProfileRoute: typeof AdminProfileRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminApplicationIdRoute: typeof AdminApplicationIdRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminApplicationsRoute: AdminApplicationsRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminPositionManagementRoute: AdminPositionManagementRoute,
+  AdminProfileRoute: AdminProfileRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminApplicationIdRoute: AdminApplicationIdRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  LoginFrontdeskRoute: LoginFrontdeskRoute,
+  LoginMarketerRoute: LoginMarketerRoute,
+  LoginOperationsRoute: LoginOperationsRoute,
+  ApiPublicPcSplatRoute: ApiPublicPcSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
