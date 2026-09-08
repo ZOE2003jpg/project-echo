@@ -1,5 +1,5 @@
 import { Outlet, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Bell, Check } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -130,7 +130,7 @@ export function DashboardLayout() {
   };
 
   return (
-    <SidebarProvider style={{ "--sidebar-width": "17.5rem", "--sidebar-width-icon": "4rem" } as React.CSSProperties}>
+    <SidebarProvider style={{ "--sidebar-width": "17.5rem", "--sidebar-width-icon": "4rem" } as CSSProperties}>
       <div className="app-canvas flex min-h-screen w-full">
         <AdminSidebar />
         <div className="flex min-w-0 flex-1 flex-col">
