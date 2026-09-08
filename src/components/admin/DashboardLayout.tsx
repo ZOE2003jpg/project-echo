@@ -134,8 +134,10 @@ export function DashboardLayout() {
       <div className="app-canvas flex min-h-screen w-full">
         <AdminSidebar />
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border/60 bg-background/80 px-3 backdrop-blur-xl sm:px-6 print:hidden">
-            <SidebarTrigger />
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border bg-background/85 px-3 backdrop-blur-xl sm:h-16 sm:px-6 print:hidden">
+            <SidebarTrigger aria-label="Toggle navigation" />
+            <span className="ml-1 hidden text-sm font-semibold text-muted-foreground sm:block">Pitch Capital</span>
+
 
             <div className="ml-auto flex items-center gap-2">
               <DropdownMenu>

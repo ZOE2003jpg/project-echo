@@ -150,8 +150,9 @@ export function AdminSidebar() {
                     asChild
                     isActive={isActive(item.url, item.exact)}
                     tooltip={item.title}
-                    className="rounded-lg font-medium transition-colors data-[active=true]:bg-primary/10 data-[active=true]:font-semibold data-[active=true]:text-primary"
+                    className="relative rounded-lg font-medium transition-colors duration-150 data-[active=true]:bg-primary/10 data-[active=true]:font-semibold data-[active=true]:text-primary data-[active=true]:before:absolute data-[active=true]:before:left-0 data-[active=true]:before:top-1.5 data-[active=true]:before:bottom-1.5 data-[active=true]:before:w-0.5 data-[active=true]:before:rounded-full data-[active=true]:before:bg-primary"
                   >
+
                     <Link to={item.url} className="flex items-center gap-2.5">
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
