@@ -20,25 +20,25 @@ export function StatCard({
   tone?: "primary" | "warning" | "success" | "danger" | "info";
 }) {
   const tones: Record<string, string> = {
-    primary: "bg-primary/10 text-primary",
-    warning: "bg-amber-500/10 text-amber-700 dark:text-amber-300",
-    success: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
+    primary: "bg-primary text-primary-foreground",
+    warning: "bg-accent/25 text-accent-foreground",
+    success: "bg-success/10 text-success",
     danger: "bg-destructive/10 text-destructive",
-    info: "bg-blue-500/10 text-blue-700 dark:text-blue-300",
+    info: "bg-info/10 text-info",
   };
   return (
-    <Card className="transition-shadow duration-200 hover:shadow-soft">
+    <Card className="group metric-enter overflow-hidden border-border bg-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lift">
       <CardContent className="flex items-start justify-between gap-4 p-5">
         <div className="min-w-0">
-          <div className="truncate text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+          <div className="truncate text-[10px] font-extrabold uppercase text-muted-foreground">
             {label}
           </div>
-          <div className="mt-1.5 truncate font-display text-[28px] font-bold leading-none tabular-nums text-foreground">
+          <div className="mt-2 truncate font-display text-4xl font-normal leading-none tabular-nums text-primary">
             {value}
           </div>
           {hint && <div className="mt-1.5 truncate text-xs text-muted-foreground">{hint}</div>}
         </div>
-        <div className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-lg", tones[tone])}>
+        <div className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-md transition-transform duration-200 group-hover:rotate-3 group-hover:scale-105", tones[tone])}>
           <Icon className="h-5 w-5" />
         </div>
       </CardContent>

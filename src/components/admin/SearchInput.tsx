@@ -21,14 +21,14 @@ export function SearchInput({
 }) {
   return (
     <div className={cn("relative", className)}>
-      <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
       <Input
         id={id}
         type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="h-10 pl-9 pr-9 sm:w-80"
+        className="h-11 bg-card pl-10 pr-9 sm:w-96"
         aria-label={placeholder}
       />
       {value && (
