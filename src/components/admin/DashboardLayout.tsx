@@ -1,5 +1,5 @@
 import { Outlet, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Bell, Check } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -130,13 +130,16 @@ export function DashboardLayout() {
   };
 
   return (
-    <SidebarProvider>
+    <SidebarProvider style={{ "--sidebar-width": "17.5rem", "--sidebar-width-icon": "4rem" } as CSSProperties}>
       <div className="app-canvas flex min-h-screen w-full">
         <AdminSidebar />
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border bg-background/85 px-3 backdrop-blur-xl sm:h-16 sm:px-6 print:hidden">
-            <SidebarTrigger aria-label="Toggle navigation" />
-            <span className="ml-1 hidden text-sm font-semibold text-muted-foreground sm:block">Pitch Capital</span>
+          <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border bg-card/90 px-4 backdrop-blur-xl sm:h-20 sm:px-8 print:hidden">
+            <SidebarTrigger aria-label="Toggle navigation" className="border border-border bg-background" />
+            <div className="ml-1 hidden sm:block">
+              <div className="text-[9px] font-extrabold uppercase text-gold">Operations centre</div>
+              <span className="text-sm font-bold text-foreground">Pitch Capital</span>
+            </div>
 
 
             <div className="ml-auto flex items-center gap-2">
@@ -240,7 +243,7 @@ export function DashboardLayout() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-2 px-2">
-                    <Avatar className="h-9 w-9 ring-2 ring-primary/15">
+                    <Avatar className="h-9 w-9 ring-2 ring-gold/35">
                       <AvatarFallback className="brand-gradient text-primary-foreground text-xs font-bold">{identity.initials}</AvatarFallback>
                     </Avatar>
 
@@ -267,7 +270,7 @@ export function DashboardLayout() {
               </DropdownMenu>
             </div>
           </header>
-          <main className="mx-auto w-full min-w-0 max-w-[1400px] flex-1 px-3 py-6 sm:px-6 lg:px-8 print:p-0">
+          <main className="mx-auto w-full min-w-0 max-w-[1500px] flex-1 px-4 py-7 sm:px-8 sm:py-9 lg:px-10 print:p-0">
             <Outlet />
           </main>
         </div>

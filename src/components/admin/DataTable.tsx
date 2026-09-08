@@ -46,13 +46,13 @@ export function DataTable<T>({
         <Table>
           {caption && <caption className="sr-only">{caption}</caption>}
           <TableHeader>
-            <TableRow className="border-b border-border bg-muted/40 hover:bg-muted/40">
+            <TableRow className="border-b border-border bg-muted/55 hover:bg-muted/55">
               {columns.map((c) => (
                 <TableHead
                   key={c.key}
                   scope="col"
                   className={cn(
-                    "h-10 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground",
+                    "h-12 text-[10px] font-extrabold uppercase text-muted-foreground",
                     c.align === "right" && "text-right",
                     c.className,
                   )}
@@ -63,13 +63,13 @@ export function DataTable<T>({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={getRowKey(row)} className="border-b border-border/50 transition-colors hover:bg-muted/40">
+            {rows.map((row, index) => (
+              <TableRow key={getRowKey(row)} style={{ animationDelay: `${Math.min(index, 10) * 28}ms` }} className="table-row-enter border-b border-border/55 transition-all duration-150 hover:bg-accent/10">
                 {columns.map((c) => (
                   <TableCell
                     key={c.key}
                     className={cn(
-                      "py-3 align-middle",
+                      "py-4 align-middle",
                       c.align === "right" && "text-right",
                       c.numeric && "tabular-nums",
                       c.className,
@@ -87,7 +87,7 @@ export function DataTable<T>({
       {/* Mobile: one card per record */}
       <ul className="divide-y divide-border/60 md:hidden">
         {rows.map((row) => (
-          <li key={getRowKey(row)} className="space-y-3 px-4 py-4">
+          <li key={getRowKey(row)} className="table-row-enter space-y-3 px-4 py-5">
             {primary && <div>{primary.cell(row)}</div>}
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2">
               {rest.map((c) => (

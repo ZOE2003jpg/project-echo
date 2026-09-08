@@ -1,5 +1,5 @@
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
-import { LayoutDashboard, FileText, BarChart3, User, LogOut, Building2, Inbox, Briefcase, Landmark, Archive } from "lucide-react";
+import { LayoutDashboard, FileText, BarChart3, User, LogOut, Inbox, Briefcase, Landmark, Archive } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -123,24 +123,24 @@ export function AdminSidebar() {
     exact ? pathname === url : pathname === url || pathname.startsWith(url + "/");
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b border-sidebar-border">
-        <div className="flex items-center gap-3 px-2 py-3">
-          <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl brand-gradient text-primary-foreground shadow-soft">
+    <Sidebar collapsible="icon" className="border-r-0">
+      <SidebarHeader className="border-b border-sidebar-border px-3 py-5">
+        <div className="flex items-center gap-3 px-1">
+          <div className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-md ring-2 ring-gold/35 shadow-lift">
             <img src={logoUrl} alt="Pitch Capital Logo" className="h-full w-full object-cover" />
           </div>
           {!collapsed && (
             <div className="min-w-0">
-              <div className="truncate font-display text-sm font-bold tracking-tight">Pitch Capital</div>
-              <div className="truncate text-[11px] uppercase tracking-wider text-muted-foreground">Admin Console</div>
+              <div className="truncate font-display text-lg font-normal uppercase leading-none text-sidebar-foreground">Pitch Capital</div>
+              <div className="mt-1 truncate text-[9px] font-extrabold uppercase text-gold">Admin Portal</div>
             </div>
           )}
         </div>
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-[10px] font-semibold uppercase tracking-widest">Manage</SidebarGroupLabel>
+        <SidebarGroup className="px-4 py-6">
+          <SidebarGroupLabel className="mb-2 text-[9px] font-extrabold uppercase text-sidebar-foreground/40">Workspace</SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu>
@@ -150,10 +150,10 @@ export function AdminSidebar() {
                     asChild
                     isActive={isActive(item.url, item.exact)}
                     tooltip={item.title}
-                    className="relative rounded-lg font-medium transition-colors duration-150 data-[active=true]:bg-primary/10 data-[active=true]:font-semibold data-[active=true]:text-primary data-[active=true]:before:absolute data-[active=true]:before:left-0 data-[active=true]:before:top-1.5 data-[active=true]:before:bottom-1.5 data-[active=true]:before:w-0.5 data-[active=true]:before:rounded-full data-[active=true]:before:bg-primary"
+                    className="relative h-11 rounded-md text-sidebar-foreground/60 transition-all duration-150 hover:translate-x-0.5 hover:bg-sidebar-accent hover:text-sidebar-foreground data-[active=true]:bg-sidebar-accent data-[active=true]:font-bold data-[active=true]:text-sidebar-foreground data-[active=true]:shadow-[inset_3px_0_0_var(--gold)]"
                   >
 
-                    <Link to={item.url} className="flex items-center gap-2.5">
+                    <Link to={item.url} className="flex items-center gap-3">
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
                     </Link>
@@ -165,11 +165,11 @@ export function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t border-sidebar-border">
+      <SidebarFooter className="border-t border-sidebar-border p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Logout">
-              <button onClick={handleLogout} className="flex items-center gap-2 text-destructive w-full text-left">
+              <button onClick={handleLogout} className="flex w-full items-center gap-3 text-sidebar-foreground/55 transition-colors hover:text-sidebar-foreground">
                 <LogOut className="h-4 w-4" />
                 {!collapsed && <span>Logout</span>}
               </button>
